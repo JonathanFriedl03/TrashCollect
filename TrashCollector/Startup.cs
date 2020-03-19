@@ -62,7 +62,7 @@ namespace TrashCollector
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");//this is home page default
                 endpoints.MapRazorPages();
             });
         }
