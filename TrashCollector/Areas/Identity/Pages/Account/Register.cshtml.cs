@@ -105,7 +105,7 @@ namespace TrashCollector.Areas.Identity.Pages.Account
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
+                    {//if role is customer go to customer control create in view maybe comment out next line and do own redirect to action
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
                     }
                     else

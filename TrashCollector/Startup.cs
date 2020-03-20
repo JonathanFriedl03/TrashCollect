@@ -12,6 +12,8 @@ using TrashCollector.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Security.Claims;
+using TrashCollector.ActionFilters;
 
 namespace TrashCollector
 {
@@ -32,7 +34,8 @@ namespace TrashCollector
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI().AddDefaultTokenProviders();
-               
+           // services.AddScoped<ClaimsPrincipal>(s => s.GetService<IHttpContextAccesor>().HttpContext.User);
+            services.AddControllers(config => { config.Filters.Add(typeof(GlobalRouting)); });
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

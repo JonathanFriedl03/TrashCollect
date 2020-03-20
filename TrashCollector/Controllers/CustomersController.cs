@@ -22,7 +22,8 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Customers.ToListAsync());
+            var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Customers/Details/5
@@ -34,6 +35,7 @@ namespace TrashCollector.Controllers
             }
 
             var customer = await _context.Customers
+                .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
@@ -46,6 +48,7 @@ namespace TrashCollector.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -54,14 +57,16 @@ namespace TrashCollector.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,UserName,Password,Email")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Address,City,State,ZipCode,PickUpDay,ExtraPickUpDate,SuspendStart,SuspendEnd,Balance,IdentityUserId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
+               //determine which user gets which view page
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
 
@@ -78,6 +83,7 @@ namespace TrashCollector.Controllers
             {
                 return NotFound();
             }
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
 
@@ -86,7 +92,7 @@ namespace TrashCollector.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,UserName,Password,Email")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Address,City,State,ZipCode,PickUpDay,ExtraPickUpDate,SuspendStart,SuspendEnd,Balance,IdentityUserId")] Customer customer)
         {
             if (id != customer.Id)
             {
@@ -113,6 +119,7 @@ namespace TrashCollector.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
 
@@ -125,6 +132,7 @@ namespace TrashCollector.Controllers
             }
 
             var customer = await _context.Customers
+                .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
