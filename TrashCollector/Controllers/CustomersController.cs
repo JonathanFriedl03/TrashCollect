@@ -63,7 +63,7 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-               //determine which user gets which view page
+               // assign IdentityUserId to new Customer
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
