@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +13,7 @@ namespace TrashCollector.Models
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name ="First Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
@@ -21,6 +22,19 @@ namespace TrashCollector.Models
         public string State { get; set; }
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
+
+        public static List<SelectListItem> DaysOfWeek()
+        {
+            return new List<SelectListItem>() {
+            new SelectListItem ("Monday","Monday", true),
+            new SelectListItem ( "Tuesday","Tuesday"),
+            new SelectListItem ( "Wednesday", "Wednesday"),
+            new SelectListItem ("Thursday","Thursday"),
+            new SelectListItem ("Friday", "Friday" ),
+            new SelectListItem ("Saturday","Saturday"),
+            new SelectListItem ("Sunday", "Sunday")
+        };
+        }
         public DayOfWeek PickUpDay { get; set; }
         public DateTime ExtraPickUpDate { get; set; }
         public DateTime SuspendStart { get; set; }
