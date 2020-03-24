@@ -39,7 +39,7 @@ namespace TrashCollector.Models
         public DateTime ExtraPickUpDate { get; set; }
         public DateTime SuspendStart { get; set; }
         public DateTime SuspendEnd { get; set; }
-        public double Balance { get; set; }
+        public double Balance { get; set; } = 0;
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
