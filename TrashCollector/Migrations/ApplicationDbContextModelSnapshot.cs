@@ -48,15 +48,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9b2533ab-147c-44e3-96f5-dce6a98f869c",
-                            ConcurrencyStamp = "9896bd4e-3ca4-4006-9b56-e3804f14227a",
+                            Id = "255c9ef8-f372-4fb4-ad05-e5e3fee6d1c7",
+                            ConcurrencyStamp = "3b1123e4-5abe-47a7-958a-f70f85d70ceb",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "fe7d3249-0c04-4077-a94e-bcd52fa4a6ef",
-                            ConcurrencyStamp = "039a6ebd-2596-4c68-8105-9e440bc5063c",
+                            Id = "61c27362-246b-4423-9de8-cf1a4bc9ff56",
+                            ConcurrencyStamp = "dde75f01-1272-4106-988d-95a5383bff1a",
                             Name = "Employee",
                             NormalizedName = "Employee"
                         });
@@ -288,12 +288,6 @@ namespace TrashCollector.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -303,8 +297,8 @@ namespace TrashCollector.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PickUpDay")
+                        .HasColumnType("int");
 
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");

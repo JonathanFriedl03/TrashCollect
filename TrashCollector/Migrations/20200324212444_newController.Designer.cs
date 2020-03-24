@@ -10,8 +10,8 @@ using TrashCollector.Data;
 namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200320160342_updateroles")]
-    partial class updateroles
+    [Migration("20200324212444_newController")]
+    partial class newController
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "912754f0-81dd-4703-8a73-7582e3da4da0",
-                            ConcurrencyStamp = "3f122e2f-3919-4597-a36b-1c964fa7f814",
+                            Id = "255c9ef8-f372-4fb4-ad05-e5e3fee6d1c7",
+                            ConcurrencyStamp = "3b1123e4-5abe-47a7-958a-f70f85d70ceb",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "e2855915-da69-414b-bfa3-50e26612565b",
-                            ConcurrencyStamp = "361ac62d-9b2f-4c1e-bf34-5e12f1242721",
+                            Id = "61c27362-246b-4423-9de8-cf1a4bc9ff56",
+                            ConcurrencyStamp = "dde75f01-1272-4106-988d-95a5383bff1a",
                             Name = "Employee",
                             NormalizedName = "Employee"
                         });
@@ -290,12 +290,6 @@ namespace TrashCollector.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -305,8 +299,8 @@ namespace TrashCollector.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PickUpDay")
+                        .HasColumnType("int");
 
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");

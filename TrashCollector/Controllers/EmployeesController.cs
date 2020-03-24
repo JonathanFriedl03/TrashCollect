@@ -10,7 +10,7 @@ using TrashCollector.Data;
 using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
-{   
+{
     [Authorize(Roles = "Employee")]
     public class EmployeesController : Controller
     {
@@ -21,7 +21,7 @@ namespace TrashCollector.Controllers
             _context = context;
         }
 
-        // GET: Employees
+        // GET: Employees1
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Employees.Include(e => e.IdentityUser);
@@ -30,7 +30,7 @@ namespace TrashCollector.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Employees/Details/5
+        // GET: Employees1/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,19 +49,19 @@ namespace TrashCollector.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Create
+        // GET: Employees1/Create
         public IActionResult Create()
         {
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Employees/Create
+        // POST: Employees1/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Address,City,State,ZipCode,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,ZipCode,PickUpDay")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace TrashCollector.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Edit/5
+        // GET: Employees1/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,12 +90,12 @@ namespace TrashCollector.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Edit/5
+        // POST: Employees1/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Address,City,State,ZipCode,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,ZipCode,PickUpDay,IdentityUserId")] Employee employee)
         {
             if (id != employee.Id)
             {
@@ -126,7 +126,7 @@ namespace TrashCollector.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Delete/5
+        // GET: Employees1/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -145,7 +145,7 @@ namespace TrashCollector.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Delete/5
+        // POST: Employees1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
