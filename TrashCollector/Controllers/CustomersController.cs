@@ -25,14 +25,14 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public IActionResult Index()
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            if (customer == null)
-            {
-                return RedirectToAction("Create");
-            }
-            
-             return View(customer);
+            //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            //if (customer == null)
+            //{
+            //    return RedirectToAction("Edit");
+            //}
+            // return View(customer);
+            return RedirectToAction("Edit");
         }
 
         // GET: Customers/Details/5
@@ -126,35 +126,8 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var customer = await _context.Customers
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
 
-            return View(customer);
-        }
-
-        // POST: Customers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var customer = await _context.Customers.FindAsync(id);
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
         private bool CustomerExists(int id)
         {

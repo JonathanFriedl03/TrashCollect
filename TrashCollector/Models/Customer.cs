@@ -23,17 +23,21 @@ namespace TrashCollector.Models
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
 
-        public static List<SelectListItem> DaysOfWeek()
+        public static List<SelectListItem> DaysOfWeek(DayOfWeek? day)//? here means nullable cuz enum 
+                                                                        //doesnt allow a null value
         {
             return new List<SelectListItem>() {
-            new SelectListItem ("Monday","Monday", true),
-            new SelectListItem ( "Tuesday","Tuesday"),
-            new SelectListItem ( "Wednesday", "Wednesday"),
-            new SelectListItem ("Thursday","Thursday"),
-            new SelectListItem ("Friday", "Friday" ),
-            new SelectListItem ("Saturday","Saturday"),
-            new SelectListItem ("Sunday", "Sunday")
-        };
+            new SelectListItem ("Monday","Monday", day  == DayOfWeek.Monday),
+            new SelectListItem ( "Tuesday","Tuesday", day == DayOfWeek.Tuesday),
+            new SelectListItem ( "Wednesday", "Wednesday", day == DayOfWeek.Wednesday),
+            new SelectListItem ("Thursday","Thursday", day == DayOfWeek.Thursday),
+            new SelectListItem ("Friday", "Friday", day == DayOfWeek.Friday)
+            };
+        }
+        public List<SelectListItem> CurrentDaysOfWeek()
+        {
+            var days = DaysOfWeek(this.PickUpDay);
+            return days;
         }
         public DayOfWeek PickUpDay { get; set; }
         public DateTime ExtraPickUpDate { get; set; }
